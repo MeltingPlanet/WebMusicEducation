@@ -1,3 +1,5 @@
+document.body.style.backgroundColor = "#6666";
+
 var piano = new Nexus.Piano('#piano',{
     'size': [1000,300],
     'mode': 'button',  // 'button', 'toggle', or 'impulse'
