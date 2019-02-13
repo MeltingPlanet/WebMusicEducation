@@ -1,0 +1,321 @@
+{
+    "header": {
+      "PPQ": 96,
+      "timeSignature": [
+        4,
+        4
+      ],
+      "bpm": 120,
+      "name": ""
+    },
+    "startTime": 0,
+    "duration": 24,
+    "tracks": [
+      {
+        "startTime": 0,
+        "duration": 24,
+        "length": 42,
+        "notes": [
+          {
+            "name": "C5",
+            "midi": 72,
+            "time": 0,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "C5",
+            "midi": 72,
+            "time": 0.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 1,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 1.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "A5",
+            "midi": 81,
+            "time": 2,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "A5",
+            "midi": 81,
+            "time": 2.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 3,
+            "velocity": 0.7952755905511811,
+            "duration": 1
+          },
+          {
+            "name": "F5",
+            "midi": 77,
+            "time": 4,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "F5",
+            "midi": 77,
+            "time": 4.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "E5",
+            "midi": 76,
+            "time": 5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "E5",
+            "midi": 76,
+            "time": 5.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "D5",
+            "midi": 74,
+            "time": 6,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "D5",
+            "midi": 74,
+            "time": 6.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "C5",
+            "midi": 72,
+            "time": 7,
+            "velocity": 0.7952755905511811,
+            "duration": 1
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 8,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 8.5,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "F5",
+            "midi": 77,
+            "time": 9,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "F5",
+            "midi": 77,
+            "time": 9.5,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "E5",
+            "midi": 76,
+            "time": 10,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "E5",
+            "midi": 76,
+            "time": 10.5,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "D5",
+            "midi": 74,
+            "time": 11,
+            "velocity": 0.7874015748031497,
+            "duration": 1
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 12,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 12.5,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "F5",
+            "midi": 77,
+            "time": 13,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "F5",
+            "midi": 77,
+            "time": 13.5,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "E5",
+            "midi": 76,
+            "time": 14,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "E5",
+            "midi": 76,
+            "time": 14.5,
+            "velocity": 0.7874015748031497,
+            "duration": 0.5
+          },
+          {
+            "name": "D5",
+            "midi": 74,
+            "time": 15,
+            "velocity": 0.7874015748031497,
+            "duration": 1
+          },
+          {
+            "name": "C5",
+            "midi": 72,
+            "time": 16,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "C5",
+            "midi": 72,
+            "time": 16.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 17,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 17.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "A5",
+            "midi": 81,
+            "time": 18,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "A5",
+            "midi": 81,
+            "time": 18.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "G5",
+            "midi": 79,
+            "time": 19,
+            "velocity": 0.7952755905511811,
+            "duration": 1
+          },
+          {
+            "name": "F5",
+            "midi": 77,
+            "time": 20,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "F5",
+            "midi": 77,
+            "time": 20.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "E5",
+            "midi": 76,
+            "time": 21,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "E5",
+            "midi": 76,
+            "time": 21.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "D5",
+            "midi": 74,
+            "time": 22,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "D5",
+            "midi": 74,
+            "time": 22.5,
+            "velocity": 0.7952755905511811,
+            "duration": 0.5
+          },
+          {
+            "name": "C5",
+            "midi": 72,
+            "time": 23,
+            "velocity": 0.7952755905511811,
+            "duration": 1
+          }
+        ],
+        "controlChanges": {},
+        "id": 0,
+        "name": "",
+        "channelNumber": 0,
+        "isPercussion": false
+      }
+    ]
+  }
