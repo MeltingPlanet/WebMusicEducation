@@ -13,7 +13,14 @@ function onMIDIMessage(message) {
         console.log('MIDI data', data); // MIDI data [144, 63, 73]
     }
 }
+/*
+var Player = new MidiPlayer.Player(function(event) {
+    console.log(event);
+});
 
+Player.loadFile('./test.mid');
+Player.play();
+*/
 
 
 
