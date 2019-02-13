@@ -27,6 +27,8 @@ Player.play();
 
 
 
+//The melody can be played by sending a call to a function that receive (any)output from the piano keyboard
+//to be played by index number with this - synth.triggerAttackRelease
 
 
 /* Notation
