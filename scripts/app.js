@@ -1,4 +1,4 @@
-document.body.style.backgroundColor = "#6666";
+//document.body.style.backgroundColor = "#6666";
 
 var piano = new Nexus.Piano('#piano',{
     'size': [1000,300],
@@ -15,6 +15,44 @@ function onMIDIMessage(message) {
     }
 }
 
+var songSelect = new Nexus.Select('song',{
+    'size': [100,30],
+    'options': ['Choose','ABCD'] //List of sounds to chose from
+});
+
+
+var url, songChoice, BPM;
+var midiNotes = [];
+var noteNames = [];
+var noteDurations = [];
+
+songSelect.on("change", function(i){
+    url = "sounds/" + songSelect.value + ".json";
+    console.log(url);
+    var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET', url);
+    ourRequest.onload = function(){
+        var songChoice = JSON.parse(ourRequest.responseText);               //We could have just sent this object to PlayMelody but
+        console.log(songChoice);                                            //and extracted it there using
+        BPM = songChoice.header.bpm;                                        //This method
+        for(var i = 0; i < songChoice.tracks[0].notes.length; i++){         //But maybe it is easier/cleaner for us all to work with arrays in PlayMelody
+            midiNotes[i] =  songChoice.tracks[0].notes[i].midi;             //Keeping it like this for now
+            noteNames[i] =  songChoice.tracks[0].notes[i].name;
+            noteDurations[i] =  songChoice.tracks[0].notes[i].duration;
+        }
+
+        PlayMelody(BPM, midiNotes, noteNames, noteDurations)
+    };
+    ourRequest.send(); 
+});
+
+function PlayMelody(BPM, midiNotes, noteNames, noteDurations){              //Now we just need some Tone.js magic where we can enter these values and let it play :)
+    
+    console.log("BPM: " + midiNotes);
+    console.log("midiNotes: " + midiNotes);
+    console.log("noteNames: " + noteNames);
+    console.log("noteDurations: " + noteDurations);
+}
 
 //The melody can be played by sending a call to a function that receive (any)output from the piano keyboard
 //to be played by index number with this - synth.triggerAttackRelease
