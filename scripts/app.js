@@ -41,18 +41,20 @@ songSelect.on("change", function(i){
             noteDurations[i] =  songChoice.tracks[0].notes[i].duration;
         }
 
-        PlayMelody(BPM, midiNotes, noteNames, noteDurations)
+        PlayMelody(midiNotes, noteNames, noteDurations);
     };
     ourRequest.send(); 
 });
 
-function PlayMelody(BPM, midiNotes, noteNames, noteDurations){              //Now we just need some Tone.js magic where we can enter these values and let it play :)
+function PlayMelody(midiNotes, noteNames, noteDurations){              //Now we just need some Tone.js magic where we can enter these values and let it play :)
     
-    console.log("BPM: " + midiNotes);
     console.log("midiNotes: " + midiNotes);
     console.log("noteNames: " + noteNames);
     console.log("noteDurations: " + noteDurations);
+
 }
+
+var synth = new Tone.Synth().toMaster();
 
 //The melody can be played by sending a call to a function that receive (any)output from the piano keyboard
 //to be played by index number with this - synth.triggerAttackRelease
