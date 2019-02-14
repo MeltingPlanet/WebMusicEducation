@@ -1,4 +1,4 @@
-/* var currentNoteIndex = 0;
+var currentNoteIndex = 0;
 document.querySelector("#note").addEventListener('click', function() {
     var note = abcsong.notes[currentNoteIndex];
     var noteString = currentNoteIndex + " – Name: " + note.name + ", midi: " + note.midi + ", duration: " + note.duration;
@@ -54,4 +54,4 @@ document.querySelector("#note").addEventListener('click', function() {
     }
   ]
 };
-</script> */
+</script>
