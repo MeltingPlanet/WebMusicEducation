@@ -78,10 +78,10 @@ var synth = new Tone.Synth({
 
 }
 
-document.querySelector("play").addEventListener('click', function() {
+document.querySelector("#play").addEventListener('click', function() {
         PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
-}
+})
 
-document.querySelector("stop").addEventListener('click', function() {
+document.querySelector("#stop").addEventListener('click', function() {
     synth.disconnect ();
-}
+})
