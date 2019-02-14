@@ -16,7 +16,7 @@ function onMIDIMessage(message) {
 }
 
 var songSelect = new Nexus.Select('song',{
-    'size': [x,y],
+    'size': [100,30],
     'options': ['AlleFugler','ABCD'] //List of sounds to chose from
 });
 songSelect.size = [100,30];
