@@ -1,5 +1,3 @@
-//document.body.style.backgroundColor = "#6666";
-
 var piano = new Nexus.Piano('#piano',{
     'size': [1000,300],
     'mode': 'button',  // 'button', 'toggle', or 'impulse'
@@ -54,7 +52,7 @@ function PlayMelody(midiNotes, noteNames, noteDurations){              //Now we 
 
 }
 
-var synth = new Tone.Synth().toMaster();
+//var synth = new Tone.Synth().toMaster();
 
 //The melody can be played by sending a call to a function that receive (any)output from the piano keyboard
 //to be played by index number with this - synth.triggerAttackRelease
