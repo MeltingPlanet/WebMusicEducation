@@ -1,3 +1,5 @@
+window.onload = function(){
+
 var piano = new Nexus.Piano('#piano',{
     'size': [1000,300],
     'mode': 'button',  // 'button', 'toggle', or 'impulse'
@@ -23,6 +25,7 @@ var url, songChoice, BPM;
 var midiNotes = [];
 var noteNames = [];
 var noteDurations = [];
+var noteStart = [];
 
 songSelect.on("change", function(i){
     url = "sounds/" + songSelect.value + ".json";
@@ -37,22 +40,30 @@ songSelect.on("change", function(i){
             midiNotes[i] =  songChoice.tracks[0].notes[i].midi;             //Keeping it like this for now
             noteNames[i] =  songChoice.tracks[0].notes[i].name;
             noteDurations[i] =  songChoice.tracks[0].notes[i].duration;
+            noteStart[i] =  songChoice.tracks[0].notes[i].time;
         }
 
-        PlayMelody(midiNotes, noteNames, noteDurations);
+        PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
     };
     ourRequest.send(); 
 });
 
-function PlayMelody(midiNotes, noteNames, noteDurations){              //Now we just need some Tone.js magic where we can enter these values and let it play :)
+function PlayMelody(midiNotes, noteNames, noteDurations, noteStart){              //Now we just need some Tone.js magic where we can enter these values and let it play :)
     
     console.log("midiNotes: " + midiNotes);
     console.log("noteNames: " + noteNames);
     console.log("noteDurations: " + noteDurations);
+    console.log("noteStart: " + noteStart);
 
+    
+    for(var i = 0; i < noteNames.length; i++){
+        synth.triggerAttackRelease(noteNames[i], noteDurations[i], noteStart[i]);
+    }
 }
 
-//var synth = new Tone.Synth().toMaster();
+
+var synth = new Tone.FMSynth().toMaster();
+
 
 //The melody can be played by sending a call to a function that receive (any)output from the piano keyboard
 //to be played by index number with this - synth.triggerAttackRelease
@@ -107,3 +118,4 @@ function PlayMelody(midiNotes, noteNames, noteDurations){              //Now we 
     41, 62, 4n;
     42, 60, 4n;
 */
+}
