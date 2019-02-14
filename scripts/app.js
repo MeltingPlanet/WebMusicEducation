@@ -83,5 +83,5 @@ document.querySelector("play").addEventListener('click', function() {
 }
 
 document.querySelector("stop").addEventListener('click', function() {
-    synth.disconnect ();
+    synth.disconnect();
 }
