@@ -5,7 +5,7 @@ document.querySelector("#note").addEventListener('click', function() {
     console.log(noteString);
     currentNoteIndex = (currentNoteIndex + 1) % abcsong.notes.length;
 });
- var abcsong = {
+  var abcsong = {
   "startTime": 0,
   "duration": 24,
   "length": 42,
