@@ -38,7 +38,7 @@ var noteStart = [];
 
 var piano = new Nexus.Piano('#piano',{
     'size': [1000,300],
-    'mode': 'button',  // 'button', 'toggle', or 'impulse'
+    'mode': 'toggle',  // 'button', 'toggle', or 'impulse'
     'lowNote': 60,
     'highNote': 96
 });
@@ -46,7 +46,7 @@ var piano = new Nexus.Piano('#piano',{
 function onMIDIMessage(message) {
     data = message.data; // this gives us our [command/channel, note, velocity] data.
     if(message.data[0] != 254){
-        piano.toggleKey(midiNotes[currentNoteIndex], 0);
+        //piano.toggleKey(midiNotes[currentNoteIndex], 0);
         console.log('MIDI data', data); // MIDI data [144, 63, 73]
         if(message.data[0] === 144){
             TriggerMelody(midiNotes, noteNames, noteDurations);
@@ -83,7 +83,6 @@ songSelect.on("change", function(i){
             noteStart[i] =  songChoice.tracks[0].notes[i].time;
         }
 
-        //PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
     };
     ourRequest.send(); 
 });
@@ -106,15 +105,13 @@ function TriggerMelody(midiNotes, noteNames, noteDurations){
     console.log("noteNames: " + noteNames);
     console.log("noteDurations: " + noteDurations);
     note = noteNames[currentNoteIndex];
-    //piano.toggleKey(midiNotes[currentNoteIndex], 0);
-    //piano.toggleKey(midiNotes[currentNoteIndex], 1);
     synth.triggerAttackRelease(noteNames[currentNoteIndex], noteDurations[currentNoteIndex]);
+    piano.toggleKey(midiNotes[currentNoteIndex], 0);
     currentNoteIndex = (currentNoteIndex + 1) % noteNames.length;
 }
 
 function removeColor(midiNotes){
-    //console.log(midiNotes[currentNoteIndex]);
-    //piano.toggleKey(midiNotes[currentNoteIndex], 1);
+    piano.toggleKey(midiNotes[currentNoteIndex], 1);
 }
 
 var synth = new Tone.Synth({
