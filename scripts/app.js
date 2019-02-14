@@ -1,5 +1,13 @@
 window.onload = function(){
 
+var currentNoteIndex = 0;
+var note, noteString;
+var url, songChoice, BPM;
+var midiNotes = [];
+var noteNames = [];
+var noteDurations = [];
+var noteStart = [];
+
 var piano = new Nexus.Piano('#piano',{
     'size': [1000,300],
     'mode': 'button',  // 'button', 'toggle', or 'impulse'
@@ -11,7 +19,11 @@ function onMIDIMessage(message) {
     data = message.data; // this gives us our [command/channel, note, velocity] data.
     if(message.data[0] != 254){
         console.log('MIDI data', data); // MIDI data [144, 63, 73]
-        piano.toggleKey( message.data[1], 0)
+        console.log(data[0]);
+        if(message.data[0] === 144){
+            console.log("yees")
+            TriggerMelody(midiNotes, noteNames, noteDurations);
+        }
     }
 }
 
@@ -23,11 +35,6 @@ songSelect.size = [200,30];
 songSelect.colorize("accent","#ffd106")
 songSelect.colorize("fill","#ffd106")
 
-var url, songChoice, BPM;
-var midiNotes = [];
-var noteNames = [];
-var noteDurations = [];
-var noteStart = [];
 
 songSelect.on("change", function(i){
     url = "sounds/" + songSelect.value + ".json";
@@ -61,6 +68,15 @@ function PlayMelody(midiNotes, noteNames, noteDurations, noteStart){            
     for(var i = 0; i < noteNames.length; i++){
         synth.triggerAttackRelease(noteNames[i], noteDurations[i], noteStart[i]);
     }
+}
+
+function TriggerMelody(midiNotes, noteNames, noteDurations){
+    note = noteNames[currentNoteIndex];
+    //noteString = currentNoteIndex + " – Name: " + note.name + ", midi: " + note.midi + ", duration: " + note.duration;
+    //console.log(noteString);
+    currentNoteIndex = (currentNoteIndex + 1) % noteNames.length;
+    piano.toggleKey(noteNames[currentNoteIndex], 0);
+    synth.triggerAttackRelease(noteNames[currentNoteIndex], noteDurations[currentNoteIndex], 0);
 }
 
 var synth = new Tone.Synth({
