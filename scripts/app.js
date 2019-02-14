@@ -1,5 +1,33 @@
 window.onload = function(){
 
+if (navigator.requestMIDIAccess) {
+navigator.requestMIDIAccess({
+    sysex: false // this defaults to 'false' and we won't be covering sysex in this article. 
+}).then(onMIDISuccess, onMIDIFailure);
+} else {
+alert("No MIDI support in your browser.");
+}
+
+// midi functions
+function onMIDISuccess(midiAccess) {
+// when we get a succesful response, run this code
+console.log('MIDI Access Object', midiAccess);
+    // when we get a succesful response, run this code
+    midi = midiAccess; // this is our raw MIDI data, inputs, outputs, and sysex status
+
+    var inputs = midi.inputs.values();
+    // loop over all available inputs and listen for any MIDI input
+    for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
+        // each time there is a midi message call the onMIDIMessage function
+        input.value.onmidimessage = onMIDIMessage;
+    }
+}
+
+function onMIDIFailure(e) {
+// when we get a failed response, run this code
+console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + e);
+}
+      
 var currentNoteIndex = 0;
 var note, noteString;
 var url, songChoice, BPM;
@@ -11,24 +39,27 @@ var noteStart = [];
 var piano = new Nexus.Piano('#piano',{
     'size': [1000,300],
     'mode': 'button',  // 'button', 'toggle', or 'impulse'
-    'lowNote': 24,
-    'highNote': 60
+    'lowNote': 60,
+    'highNote': 96
 });
 
 function onMIDIMessage(message) {
     data = message.data; // this gives us our [command/channel, note, velocity] data.
     if(message.data[0] != 254){
+        piano.toggleKey(midiNotes[currentNoteIndex], 0);
         console.log('MIDI data', data); // MIDI data [144, 63, 73]
-        console.log(data[0]);
         if(message.data[0] === 144){
-            console.log("yees")
             TriggerMelody(midiNotes, noteNames, noteDurations);
+        }
+        if(data[0] == 128){
+            console.log("off");
+            removeColor(midiNotes);
         }
     }
 }
 
 var songSelect = new Nexus.Select('song',{
-    'size': [100,30],
+    'size': [200,30],
     'options': ['AlleFugler','ABCD'] //List of sounds to chose from
 });
 songSelect.size = [200,30];
@@ -71,12 +102,20 @@ function PlayMelody(midiNotes, noteNames, noteDurations, noteStart){            
 }
 
 function TriggerMelody(midiNotes, noteNames, noteDurations){
+    console.log("midiNotes: " + midiNotes);
+    console.log("noteNames: " + noteNames);
+    console.log("noteDurations: " + noteDurations);
     note = noteNames[currentNoteIndex];
-    //noteString = currentNoteIndex + " – Name: " + note.name + ", midi: " + note.midi + ", duration: " + note.duration;
-    //console.log(noteString);
     currentNoteIndex = (currentNoteIndex + 1) % noteNames.length;
-    piano.toggleKey(noteNames[currentNoteIndex], 0);
-    synth.triggerAttackRelease(noteNames[currentNoteIndex], noteDurations[currentNoteIndex], 0);
+    //piano.toggleKey(midiNotes[currentNoteIndex], 0);
+    //piano.toggleKey(midiNotes[currentNoteIndex], 1);
+    synth.triggerAttackRelease(noteNames[currentNoteIndex], noteDurations[currentNoteIndex]);
+
+}
+
+function removeColor(midiNotes){
+    //console.log(midiNotes[currentNoteIndex]);
+    //piano.toggleKey(midiNotes[currentNoteIndex], 1);
 }
 
 var synth = new Tone.Synth({

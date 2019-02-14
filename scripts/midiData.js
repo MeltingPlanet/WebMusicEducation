@@ -1,5 +1,6 @@
 // request MIDI access
-var onMIDIMessage;
+//var onMIDIMessage;
+/*
 if (navigator.requestMIDIAccess) {
     navigator.requestMIDIAccess({
         sysex: false // this defaults to 'false' and we won't be covering sysex in this article. 
@@ -33,3 +34,4 @@ if (navigator.requestMIDIAccess) {
     console.log('MIDI data', data); // MIDI data [144, 63, 73]
  
   }
+  */
