@@ -19,7 +19,9 @@ var songSelect = new Nexus.Select('song',{
     'size': [100,30],
     'options': ['AlleFugler','ABCD'] //List of sounds to chose from
 });
-songSelect.size = [100,30];
+songSelect.size = [200,30];
+songSelect.colorize("accent","#ffd106")
+songSelect.colorize("fill","#ffd106")
 
 var url, songChoice, BPM;
 var midiNotes = [];
