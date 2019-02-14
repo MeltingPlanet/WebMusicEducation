@@ -43,7 +43,7 @@ songSelect.on("change", function(i){
             noteStart[i] =  songChoice.tracks[0].notes[i].time;
         }
 
-        PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
+        //PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
     };
     ourRequest.send(); 
 });
@@ -76,4 +76,12 @@ var synth = new Tone.Synth({
     }
   }).toMaster();
 
+}
+
+document.querySelector("play").addEventListener('click', function() {
+        PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
+}
+
+document.querySelector("stop").addEventListener('click', function() {
+    synth.disconnect ();
 }
