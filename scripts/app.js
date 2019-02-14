@@ -76,12 +76,14 @@ var synth = new Tone.Synth({
     }
   }).toMaster();
 
-}
+
 
 document.querySelector("#play").addEventListener('click', function() {
-        PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
-})
+    PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
+});
 
 document.querySelector("#stop").addEventListener('click', function() {
     synth.disconnect ();
-})
+});
+
+}
