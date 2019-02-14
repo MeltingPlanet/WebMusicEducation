@@ -106,11 +106,10 @@ function TriggerMelody(midiNotes, noteNames, noteDurations){
     console.log("noteNames: " + noteNames);
     console.log("noteDurations: " + noteDurations);
     note = noteNames[currentNoteIndex];
-    currentNoteIndex = (currentNoteIndex + 1) % noteNames.length;
     //piano.toggleKey(midiNotes[currentNoteIndex], 0);
     //piano.toggleKey(midiNotes[currentNoteIndex], 1);
     synth.triggerAttackRelease(noteNames[currentNoteIndex], noteDurations[currentNoteIndex]);
-
+    currentNoteIndex = (currentNoteIndex + 1) % noteNames.length;
 }
 
 function removeColor(midiNotes){
@@ -121,12 +120,12 @@ function removeColor(midiNotes){
 var synth = new Tone.Synth({
     oscillator: {
       type: 'sine',
-      modulationType: 'sawtooth',
+      /* modulationType: 'sawtooth',
       modulationIndex: 3,
-      harmonicity: 3.4
+      harmonicity: 3.4 */
     },
     envelope: {
-      attack: 0.001,
+      attack: 0.01,
       decay: 0.1,
       sustain: 0.1,
       release: 0.1
