@@ -16,10 +16,10 @@ function onMIDIMessage(message) {
 }
 
 var songSelect = new Nexus.Select('song',{
-    'size': [100,30],
-    'options': ['Choose','ABCD'] //List of sounds to chose from
+    'size': [x,y],
+    'options': ['AlleFugler','ABCD'] //List of sounds to chose from
 });
-
+songSelect.size = [100,30];
 
 var url, songChoice, BPM;
 var midiNotes = [];
@@ -61,8 +61,20 @@ function PlayMelody(midiNotes, noteNames, noteDurations, noteStart){            
     }
 }
 
-
-var synth = new Tone.FMSynth().toMaster();
+var synth = new Tone.Synth({
+    oscillator: {
+      type: 'sine',
+      modulationType: 'sawtooth',
+      modulationIndex: 3,
+      harmonicity: 3.4
+    },
+    envelope: {
+      attack: 0.001,
+      decay: 0.1,
+      sustain: 0.1,
+      release: 0.1
+    }
+  }).toMaster();
 
 
 //The melody can be played by sending a call to a function that receive (any)output from the piano keyboard
