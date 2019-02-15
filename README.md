@@ -24,3 +24,8 @@ To Do:
 - check out p5 lib
 - plan a design for the page (and piano)
 - make a draw plan of the system (Guy?)
+
+
+- Points for the presentation: talk about user, and user experiance, scaling, 
+- Wish list: When the a nots pressed by mistake, together with the wanted note, because user might press two notes togetehr, to have a function that cancel the the option of playing notes that are to close to each other time wise.
+
