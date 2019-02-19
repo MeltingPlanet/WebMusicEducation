@@ -41,6 +41,7 @@ var midiNotes = [];
 var noteNames = [];
 var noteDurations = [];
 var noteStart = [];
+var songChoice;
 
 
 var piano = new Nexus.Piano('#piano',{
@@ -76,7 +77,7 @@ function onMIDIMessage(message) {
     data = message.data; // this gives us our [command/channel, note, velocity] data.
     if(message.data[0] != 254){
         //piano.toggleKey(midiNotes[currentNoteIndex], 0);
-        console.log('MIDI data', data); // MIDI data [144, 63, 73]
+        //console.log('MIDI data', data); // MIDI data [144, 63, 73]
         if(message.data[0] === 144){
             TriggerMelody(midiNotes, noteNames, noteDurations);
         }
@@ -93,39 +94,72 @@ var songSelect = new Nexus.Select('song',{
 });
 
 songSelect.size = [200,30];
-songSelect.colorize("accent","#ffd106")
-songSelect.colorize("fill","#ffd106")
+songSelect.colorize("accent","#ffd106");
+songSelect.colorize("fill","#ffd106");
 
+url = "sounds/AlleFugler.json";
+var ourRequest = new XMLHttpRequest();
+ourRequest.open('GET', url);
+ourRequest.onload = function(){
+    var songChoice = JSON.parse(ourRequest.responseText);               //We could have just sent this object to PlayMelody but                                           //and extracted it there using                                       //This method
+    for(var i = 0; i < songChoice.tracks[0].notes.length; i++){         //But maybe it is easier/cleaner for us all to work with arrays in PlayMelody
+        midiNotes[i] =  songChoice.tracks[0].notes[i].midi;             //Keeping it like this for now
+        noteNames[i] =  songChoice.tracks[0].notes[i].name;
+        noteDurations[i] =  songChoice.tracks[0].notes[i].duration;
+        noteStart[i] =  songChoice.tracks[0].notes[i].time;
+    }
+};
+ourRequest.send(); 
 
 songSelect.on("change", function(i){
+    currentNoteIndex = 0;
+    noteNames.length = 0;
+    midiNotes.length = 0;
+    noteDurations.length = 0;
+    noteStart.length = 0;
+
     url = "sounds/" + songSelect.value + ".json";
     //console.log(url);
     var ourRequest = new XMLHttpRequest();
     ourRequest.open('GET', url);
     ourRequest.onload = function(){
-        var songChoice = JSON.parse(ourRequest.responseText);               //We could have just sent this object to PlayMelody but
-        //console.log(songChoice);                                            //and extracted it there using                                       //This method
-        for(var i = 0; i < songChoice.tracks[0].notes.length; i++){         //But maybe it is easier/cleaner for us all to work with arrays in PlayMelody
-            midiNotes[i] =  songChoice.tracks[0].notes[i].midi;             //Keeping it like this for now
+        songChoice = JSON.parse(ourRequest.responseText);              
+                                                                
+        for(i = 0; i < songChoice.tracks[0].notes.length; i++){         
+            midiNotes[i] =  songChoice.tracks[0].notes[i].midi;             
             noteNames[i] =  songChoice.tracks[0].notes[i].name;
             noteDurations[i] =  songChoice.tracks[0].notes[i].duration;
             noteStart[i] =  songChoice.tracks[0].notes[i].time;
         }
     };
     ourRequest.send(); 
+
 });
 
-function PlayMelody(midiNotes, noteNames, noteDurations, noteStart){              //Now we just need some Tone.js magic where we can enter these values and let it play :)
-    var now = context.currentTime;
 
+function PlayMelody(midiNotes, noteNames, noteDurations, noteStart){              //Now we just need some Tone.js magic where we can enter these values and let it play :)
+    var currentNoteIndex2 = 0;
+    console.log(noteNames.length);
     for(var i = 0; i < noteNames.length; i++){
-        synth.triggerAttackRelease(noteNames[i], noteDurations[i], now + (noteStart[i])); //noteStart[i]
+        Tone.Transport.scheduleOnce(play, noteStart[i]);
     }
+    Tone.Transport.start();
+    Tone.Transport.bpm.value = 120;
+    console.log(Tone.Transport);
+    function play(time){
+            synth.triggerAttackRelease(noteNames[currentNoteIndex2], noteDurations[currentNoteIndex2], time); //noteStart[i]
+            currentNoteIndex2 = (currentNoteIndex2 + 1) % noteNames.length;
+            if(currentNoteIndex2 == 0){
+                //synth.disconnect();  
+                Tone.Transport.stop();
+                Tone.Transport.cancel();
+                connect = false;
+                playing = false;
+            }
+        }
 }
 
-
 function TriggerMelody(midiNotes, noteNames, noteDurations){
-    console.log("hello");
     note = noteNames[currentNoteIndex];
     synth2.triggerAttackRelease(noteNames[currentNoteIndex], noteDurations[currentNoteIndex]);
     piano.toggleKey(midiNotes[currentNoteIndex], 0);
@@ -141,15 +175,17 @@ var synth2 = new Tone.Synth({
       type: 'sine',
     },
     envelope: {
-      attack: 0.01,
-      decay: 0.1,
-      sustain: 0.1,
+      attack: 0.001,
+      decay: 0.8,
+      sustain: 0.2,
       release: 0.1
     }
 }).toMaster();
-
-var connect = false;
+synth2.volume.value = -6;
+var synth;
 var context;
+var connect = false;
+var playing = false;
 
 document.querySelector("#play").addEventListener('click', function() {
     if (connect == false){
@@ -161,23 +197,32 @@ document.querySelector("#play").addEventListener('click', function() {
               harmonicity: 3.4 */
             },
             envelope: {
-              attack: 0.01,
-              decay: 0.1,
-              sustain: 0.1,
+              attack: 0.001,
+              decay: 0.8,
+              sustain: 0.2,
               release: 0.1
             }
-          }).toMaster();
-          connect = true;
+        }).toMaster();
+        synth.volume.value = -6;
+        connect = true;
     } 
     if (context === undefined) {
        context = new AudioContext();
     }
-    PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
+    if(playing == false){
+        PlayMelody(midiNotes, noteNames, noteDurations, noteStart);
+        playing = true;
+    }
 });
 
 document.querySelector("#stop").addEventListener('click', function() {
-    synth.disconnect();
+    if(connect == true){
+        synth.disconnect();  
+    }
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
     connect = false;
+    playing = false;
 });
 
 };
