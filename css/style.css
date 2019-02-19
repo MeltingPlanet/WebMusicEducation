@@ -5,8 +5,16 @@ html {
 body {
   min-height: 100vh;
   background-color: rgb(139,0, 0) !important;
+  font-family: 'Gloria Hallelujah', cursive;
+  color: white;
 }
-
+p{
+  font-size:  40px;
+}
+h1{
+  font-size: 80px;
+  text-decoration: underline;
+}
 #piano, #song{
   margin-top: 5%;
   position: relative;
@@ -25,7 +33,7 @@ body {
 }
 
 .button-container {
-  margin-top: 100px;
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
